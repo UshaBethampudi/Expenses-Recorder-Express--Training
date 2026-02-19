@@ -1,4 +1,5 @@
 let express=require("express");
+let cors=require("cors");
 let mongoose=require("mongoose");
 const userRoutes=require("./src/routes/usersRoutes");
 const categoriesRoutes=require("./src/routes/categoriesRoutes");
@@ -12,6 +13,7 @@ mongoose.connect("mongodb://localhost:27017/expenseRecorder")//return the promis
 .catch((err)=>{
     console.log(err)
 })
+app.use(cors());
 app.use(express.json()); //middleware
 app.use("/users",(userRoutes))
 app.use("/categories",categoriesRoutes)
@@ -24,8 +26,3 @@ app.listen(port,()=>{
 app.get("/",(req,res)=>{
     res.send("Hello from server")
 })
-
-
-
-
-
